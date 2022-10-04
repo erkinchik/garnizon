@@ -1,12 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import {AppRouter,Header} from './components'
+import { AppRouter } from "./components";
+import { Header, Footer } from "./layout";
 
 function App() {
   return (
     <div className="App">
-        <Header/>
-        <AppRouter/>
+      <Header />
+      <AppRouter />
+      <Footer />
     </div>
   );
 }
