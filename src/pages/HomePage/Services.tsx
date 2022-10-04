@@ -6,29 +6,29 @@ const Services = () => {
   return (
     <div>
       <section className={classes.services}>
-        <a
-          className={`${classes.servicesItem} ${classes.servicesItemTriple}`}
+        {/* <a
+          className={`${classes.servicesItem} ${classes.servicesItemSolo}`}
           href="#"
           target="_blank"
         >
           <div className={classes.servicesItemTitle}>G-SOS (мобильная тревожная кнопка)</div>
-        </a>
-        <a
+        </a> */}
+        {/* <a
           className={`${classes.servicesItem} ${classes.servicesItemTriple}`}
           href="#"
           target="_blank"
         >
           <div className={classes.servicesItemTitle}>Управление доступом</div>
-        </a>
-        <a
-          className={`${classes.servicesItem} ${classes.servicesItemTriple}`}
+        </a> */}
+        {/* <a
+          className={`${classes.servicesItem} ${classes.servicesItemDouble}`}
           href="#"
           target="_blank"
         >
           <div className={classes.servicesItemTitle}>
             Противопожарная система
           </div>
-        </a>
+        </a> */}
       </section>
       <section className={classes.services}>
         <a
