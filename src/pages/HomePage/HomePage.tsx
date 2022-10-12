@@ -1,19 +1,21 @@
 import React from "react";
 
-import InfoSection from "./InfoSection";
-import Services from "./Services";
+import classes from "./HomePage.module.scss";
+
+import InfoSection from "./InfoSection/InfoSection";
+import ServicesSection from "./ServicesSection/ServicesSection";
 import Hero from "./Hero/Hero";
-import MainWorkSection from "./MainWork.Section";
-import GbrSection from "./GbrSection";
-import FeedFormSection from "./FeedFormSection";
+import MainWorkSection from "./MainWorkSection/MainWorkSection";
+import GbrSection from "./GbrSection/GbrSection";
+import FeedFormSection from "./FeedFormSection/FeedFormSection";
 import PlansSection from "./PlansSection/PlansSection";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className={classes.home}>
       <Hero />
       <InfoSection />
-      <Services />
+      <ServicesSection />
       <PlansSection />
       <MainWorkSection />
       <GbrSection />

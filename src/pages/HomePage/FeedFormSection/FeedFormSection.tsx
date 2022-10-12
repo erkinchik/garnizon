@@ -1,8 +1,8 @@
 import React from "react";
 
-import classes from "./HomePage.module.scss";
+import classes from "./FeedFormSection.module.scss";
 
-import { Input } from "../../components";
+import { Input } from "../../../components";
 
 const FeedFormSection = () => {
   return (
@@ -18,11 +18,6 @@ const FeedFormSection = () => {
               action="/universal_form/lead_form/"
               className={classes.feedForm}
             >
-              <input
-                name="csrfmiddlewaretoken"
-                type="hidden"
-                defaultValue="sx9jYZoyLOPayteWjb3MmANEm9MtjgASCxGb26OB0rICBrYbvvw2vZv75jBXSSIA"
-              />
               <div className={classes.feedFormGroup}>
                 <Input
                   className={classes.feedFormControl}

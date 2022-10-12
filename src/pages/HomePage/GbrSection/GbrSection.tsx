@@ -1,12 +1,12 @@
 import React from "react";
 
-import classes from "./HomePage.module.scss";
+import classes from "./GbrSection.module.scss";
 
 const GbrSection = () => {
   return (
     <section className={classes.container}>
       <h2 className={`${classes.newTitle} ${classes.mainGbrTitle}`}>
-        СЛУЖБА РЕАГИРОВАНИЯ DELTA ЭТО:
+        СЛУЖБА РЕАГИРОВАНИЯ ГАРНИЗОН ЭТО:
       </h2>
       <div className={classes.mainGbrBlock}>
         <div className={classes.mainGbrBlockImageWrapper}>
@@ -34,7 +34,7 @@ const GbrSection = () => {
         </p>
       </div>
       <h2 className={`${classes.newTitle} ${classes.mainGbrTitle}`}>
-        РЕАГИРОВАНИЕ РОСГВАРДИЕЙ ЭТО:
+        РЕАГИРОВАНИЕ ОТРЯДА ГАРНИЗОН ЭТО:
       </h2>
       <div className={classes.mainGbrBlock}>
         <div className={classes.mainGbrBlockImageWrapper}>
@@ -53,14 +53,14 @@ const GbrSection = () => {
           Право на арест
         </p>
       </div>
-      <h2 className={`${classes.newTitle} ${classes.mainGbrTitle}`}>
-        DELTA. КОГДА МГНОВЕНИЕ ИМЕЕТ ЗНАЧЕНИЕ.
-      </h2>
-      <div className={classes.mainGbrFullImage} />
-      <div className={classes.mainGbrInfo}>
-        <strong>Поможем разобраться и определиться:</strong> <br />
-        <a href="#">Как выбрать охрану?</a>
-      </div>
+      {/*<h2 className={`${classes.newTitle} ${classes.mainGbrTitle}`}>*/}
+      {/*  DELTA. КОГДА МГНОВЕНИЕ ИМЕЕТ ЗНАЧЕНИЕ.*/}
+      {/*</h2>*/}
+      {/*<div className={classes.mainGbrFullImage} />*/}
+      {/*<div className={classes.mainGbrInfo}>*/}
+      {/*  <strong>Поможем разобраться и определиться:</strong> <br />*/}
+      {/*  <a href="#">Как выбрать охрану?</a>*/}
+      {/*</div>*/}
     </section>
   );
 };

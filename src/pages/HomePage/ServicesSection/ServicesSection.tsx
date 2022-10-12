@@ -1,8 +1,8 @@
 import React from "react";
 
-import classes from "./HomePage.module.scss";
+import classes from './Services.module.scss';
 
-const Services = () => {
+const ServicesSection = () => {
   return (
     <div>
       <section className={classes.services}>
@@ -37,7 +37,9 @@ const Services = () => {
           target="_blank"
         >
           <div>
-            <div className={classes.servicesItemTitle}>Информационная защита</div>
+            <div className={classes.servicesItemTitle}>
+             Личная охрана
+            </div>
           </div>
         </a>
         <a
@@ -66,4 +68,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default ServicesSection;

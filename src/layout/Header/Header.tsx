@@ -6,34 +6,31 @@ import classes from "./Header.module.scss";
 import { ReactComponent as TelegramIcon } from "../../icons/telegramIcon.svg";
 import { ReactComponent as WhatsAppIcon } from "../../icons/whatsappIcon.svg";
 import { ReactComponent as ProfileIcon } from "../../icons/profileIcon.svg";
-import { ReactComponent as MenuIcon } from "../../icons/menuIcon.svg";
 
-import "../../pages/HomePage/HomePage.scss";
-import { ERROR_PAGE, HOME_PAGE } from "../../routes/path";
+import {
+  ERROR_PAGE,
+  HOME_PAGE,
+  LOGIN_PAGE,
+  PROFILE_PAGE,
+} from "../../routes/path";
 
 const links = [
   {
     title: "Telegram",
     className: classes.telegramLink,
     icon: <TelegramIcon />,
-    path: "https://t.me/+79260017544",
+    path: "https://t.me/+996703701000",
   },
   {
     title: "WhatsApp",
     className: classes.whatsAppLink,
     icon: <WhatsAppIcon />,
-    path: "https://wa.me/79260017544",
-  },
-  {
-    title: "Личный Кабинет",
-    className: classes.profile,
-    icon: <ProfileIcon />,
-    path: ERROR_PAGE,
-    isLink: true,
+    path: "https://wa.me/+996703701000",
   },
 ];
 
 const Header: FC = () => {
+  const isAuth = false;
   return (
     <header className={classes.siteHeader}>
       <div className={classes.topHeader}>
@@ -53,7 +50,7 @@ const Header: FC = () => {
           </li>
         </ul>
         <ul className={`${classes.linkContainer} ${classes.icons}`}>
-          {links.map(({ path, className, title, icon, isLink }) => {
+          {links.map(({ path, className, title, icon }) => {
             return (
               <li
                 key={path}
@@ -62,54 +59,30 @@ const Header: FC = () => {
                 }`}
                 data-tooltip={title}
               >
-                {isLink ? (
-                  <Link className={`${classes.link} ${classes.icon}`} to={path}>
-                    {icon}
-                  </Link>
-                ) : (
-                  <a
-                    className={`${classes.link} ${classes.icon}`}
-                    href={path}
-                    target="_blank"
-                  >
-                    {icon}
-                  </a>
-                )}
+                <a
+                  className={`${classes.link} ${classes.icon}`}
+                  href={path}
+                  target="_blank"
+                >
+                  {icon}
+                </a>
               </li>
             );
           })}
 
-          <li className={`${classes.linkItem} ${classes.icon}`}>
-            <div
-              aria-pressed="false"
-              className={`${classes.link} ${classes.icon} ${classes.menuBtn}`}
-              role="button"
-              tabIndex={0}
+          <li
+            className={`${classes.linkItem} ${classes.icon} ${classes.profile} `}
+            data-tooltip={isAuth ? "Личный Кабинет" : "Вход"}
+          >
+            <Link
+              to={isAuth ? PROFILE_PAGE : LOGIN_PAGE}
+              className={`${classes.link} ${classes.icon} ${classes.profile}`}
             >
-              <MenuIcon />
-            </div>
+              <ProfileIcon />
+            </Link>
           </li>
+
         </ul>
-      </div>
-      <div className="menu-content-header on-dark">
-        <div className="mobile-nav">
-          <div className="dropdown city-dropdown">
-            <span className="regions-title">Москва</span>
-            <span>
-              <svg
-                className="chevron-container"
-                fill="none"
-                height={5}
-                viewBox="0 0 8 5"
-                width={8}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path className="chevron" d="M1 1L4 4L7 1" stroke="white" />
-              </svg>
-            </span>
-          </div>
-          <a href="tel:+74957774147">+7 (495) 777-41-47</a>
-        </div>
       </div>
     </header>
   );

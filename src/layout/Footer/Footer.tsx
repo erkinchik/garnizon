@@ -11,15 +11,8 @@ const Footer = () => {
             <div className={classes.contactsBlock}>
               <div className={classes.phoneEmail}>
                 <span className={classes.callPhone1}>
-                  <a href="tel:+74957774147">+7 (495) 777-41-47</a>
+                  <a href="+996 (703) 701000">+996 (703) 701000</a>
                 </span>
-                <button
-                  className="btn btn-primary btn-rounded footer__button uni-form-trigger mr-4"
-                  data-target="#modal-write-us"
-                  data-toggle="modal"
-                >
-                  Написать нам
-                </button>
               </div>
               <div className={classes.socialLinks}>
                 <a
@@ -29,6 +22,11 @@ const Footer = () => {
                 />
                 <a
                   className={`${classes.link} ${classes.social} ${classes.telegram}`}
+                  href="https://t.me/+79260017544"
+                  target="_blank"
+                />
+                <a
+                  className={`${classes.link} ${classes.social} ${classes.instagram}`}
                   href="https://t.me/+79260017544"
                   target="_blank"
                 />
@@ -56,17 +54,16 @@ const Footer = () => {
         </div>
         <div className={classes.bottomBlockWrapper}>
           <div className={classes.textContainer}>
-            <div className={classes.text}>© 2022 Дельта</div>
+            <div className={classes.text}>© 2022 Гарнизон</div>
             <div className={classes.text}>
-              Применяемые на данном интернет-сайте названия: Компания Дельта,
-              Дельта, Федеральная компания Дельта — это предприятия, работающие
-              под брендом и оказывающие услуги по организации охраны
-              недвижимости, имущества, транспортных средств, и имеющие все
-              необходимые лицензии и разрешения. Данный интернет-сайт носит
-              исключительно справочно-информационный, аналитический, обзорный
-              характер и ни при каких условиях не является публичной офертой,
-              определяемой положениями Статьи 437 Гражданского кодекса РФ, и не
-              имеет в качестве основной цели продвижение услуг на рынке.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Architecto dolorem facilis nesciunt numquam praesentium. Animi
+              consectetur eaque, explicabo harum illo laudantium libero,
+              necessitatibus, nisi omnis quas quisquam saepe sequi vel veniam
+              voluptates. Adipisci aliquam aspernatur assumenda atque doloremque
+              doloribus ea earum eligendi facere fugit iure maxime molestias
+              nemo nulla qui, quibusdam quidem repudiandae similique, tempora
+              tempore temporibus unde voluptate voluptatibus.
             </div>
           </div>
         </div>
