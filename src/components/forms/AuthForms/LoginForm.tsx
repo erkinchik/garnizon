@@ -1,12 +1,27 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import classes from "./AuthForms.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ERROR_PAGE, HOME_PAGE, REGISTRATION_PAGE } from "../../../routes/path";
 import { Button, Checkbox, Form, Input } from "antd";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { fetchLogin } from "../../../store/slices/authSlice";
+import { useAppSelector } from "../../../hooks/useAppSelector";
 
 const LoginForm: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { isAuth } = useAppSelector((state) => state.auth)
+
+  console.log(isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(HOME_PAGE)
+    }
+  }, [isAuth]);
+
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    dispatch(fetchLogin(values))
   };
 
   const onFinishFailed = (errorInfo: any) => {

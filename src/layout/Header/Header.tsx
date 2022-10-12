@@ -6,13 +6,14 @@ import classes from "./Header.module.scss";
 import { ReactComponent as TelegramIcon } from "../../icons/telegramIcon.svg";
 import { ReactComponent as WhatsAppIcon } from "../../icons/whatsappIcon.svg";
 import { ReactComponent as ProfileIcon } from "../../icons/profileIcon.svg";
-
 import {
   ERROR_PAGE,
   HOME_PAGE,
   LOGIN_PAGE,
   PROFILE_PAGE,
 } from "../../routes/path";
+import { logout } from "../../store/slices/authSlice";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 const links = [
   {
@@ -30,7 +31,7 @@ const links = [
 ];
 
 const Header: FC = () => {
-  const isAuth = false;
+  const dispatch = useAppDispatch()
   return (
     <header className={classes.siteHeader}>
       <div className={classes.topHeader}>
@@ -54,9 +55,8 @@ const Header: FC = () => {
             return (
               <li
                 key={path}
-                className={`${classes.linkItem} ${classes.icon} ${
-                  className || ""
-                }`}
+                className={`${classes.linkItem} ${classes.icon} ${className || ""
+                  }`}
                 data-tooltip={title}
               >
                 <a
@@ -72,14 +72,22 @@ const Header: FC = () => {
 
           <li
             className={`${classes.linkItem} ${classes.icon} ${classes.profile} `}
-            data-tooltip={isAuth ? "Личный Кабинет" : "Вход"}
+            data-tooltip={"Личный Кабинет"}
           >
             <Link
-              to={isAuth ? PROFILE_PAGE : LOGIN_PAGE}
+              to={PROFILE_PAGE}
               className={`${classes.link} ${classes.icon} ${classes.profile}`}
             >
               <ProfileIcon />
             </Link>
+          </li>
+
+          <li
+            className={`${classes.linkItem} ${classes.icon} ${classes.profile} `}
+            data-tooltip={"Выйти"}
+          >
+
+            <ProfileIcon onClick={()=>dispatch(logout())}/>
           </li>
 
         </ul>

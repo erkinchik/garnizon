@@ -1,26 +1,32 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 const token = localStorage.getItem("token") || null;
-const URL = process.env.REACT_APP_BASE_URL;
+// const URL = process.env.REACT_APP_BASE_URL;
+const URL = "http://discoverystudio.xyz:6969"
 
 type Loading = "idle" | "pending" | "succeeded" | "failed";
+
 interface AuthState {
   error: string | unknown;
-  isAuth: string | boolean;
+  isAuth: boolean;
+  isRegister: boolean
   loading: Loading;
   user: any;
-}
+};
+
 const initialState = {
   error: "",
-  isAuth: token || false,
+  isAuth: false,
+  isRegister: false,
   loading: "idle",
   user: {},
 } as AuthState;
 
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
-  async function (user, { rejectWithValue }) {
+  async function (user: any,  { rejectWithValue }) {
     try {
       const response = await axios.post(`${URL}/auth/login`, user);
 
@@ -46,6 +52,20 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
+
+
+
+export const fetchRegister = createAsyncThunk(
+  "auth/fetchRegister",
+  async function (user: any, { rejectWithValue }) {
+    try {
+      const {data} = await axios.post(`${URL}/auth/register`, user);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 // export const getArchive = createAsyncThunk(
 //   "auth/getArchive",
 //   async function (params, { rejectWithValue }) {
@@ -96,18 +116,34 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchLogin.pending, (state, action) => {
+    builder.addCase(fetchLogin.pending, (state) => {
       state.loading = "pending";
     });
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.loading = "failed";
       state.error = action.payload;
+      toast.error(`${action.payload}`);
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.user = action.payload;
       state.error = "succeeded";
       state.isAuth = true;
     });
+
+
+    builder.addCase(fetchRegister.pending, (state)=>{
+      state.loading = "pending";
+    })
+    builder.addCase(fetchRegister.fulfilled, (state)=>{
+      state.loading = "succeeded";
+      state.isRegister = true;
+      toast.success('Регистрация прошла успешно');
+    })
+    builder.addCase(fetchRegister.rejected, (state, action)=>{
+      state.loading = "failed";
+      state.isRegister = false
+      toast.error(`${action.payload}`);
+    })
 
     // [fetchLogin.pending]: (state) => {
     //     state.loading = true;
