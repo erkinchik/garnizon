@@ -37,11 +37,15 @@
   .feedFormBlock {
     padding: 28px 22px;
     height: auto;
+    justify-content: center;
   }
 }
 @media screen and (max-width: 992px) {
   .feedFormBlock .feedFormBlockMan {
     display: none;
+  }
+  .feedFormBlock {
+    justify-content: center;
   }
 }
 

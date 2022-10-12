@@ -47,8 +47,11 @@ const Hero = () => {
           }`}
         >
           <div className={classes.heroAreaContentInner}>
-            <div className={classes.heroMobileTitle}>Получить защиту</div>
-            <button>Заказать звонок</button>
+            <button
+              className={`${classes.btn}  ${classes.heroAreaLinkVisible} ${classes.addpulseBtn}`}
+            >
+              Заказать звонок
+            </button>
             <div className={classes.heroAreaNav}>
               <a
                 className={`${classes.heroAreaLink} ${
@@ -148,12 +151,9 @@ const Hero = () => {
                 className={`${classes.heroAreaLink} ${
                   isVisibleSupport && classes.heroAreaLinkVisible
                 }`}
-
                 href="#"
               >
-                <div
-                  className={classes.heroAreaIcon}
-                />
+                <div className={classes.heroAreaIcon} />
                 Личный кабинет
               </a>
               <a
@@ -161,9 +161,7 @@ const Hero = () => {
                   isVisibleSupport && classes.heroAreaLinkVisible
                 }`}
               >
-                <div
-                  className={classes.heroAreaIcon}
-                />
+                <div className={classes.heroAreaIcon} />
                 Пополнить баланс
               </a>
               <a
@@ -172,9 +170,7 @@ const Hero = () => {
                 }`}
                 href="#"
               >
-                <div
-                  className={classes.heroAreaIcon}
-                />
+                <div className={classes.heroAreaIcon} />
                 Скачать приложение
               </a>
               <a
@@ -183,9 +179,7 @@ const Hero = () => {
                 }`}
                 href="#"
               >
-                <div
-                  className={classes.heroAreaIcon}
-                />
+                <div className={classes.heroAreaIcon} />
                 Помощь
               </a>
               <a
@@ -194,9 +188,7 @@ const Hero = () => {
                 }`}
                 href="#"
               >
-                <div
-                  className={classes.heroAreaIcon}
-                />
+                <div className={classes.heroAreaIcon} />
                 Акции для клиентов
               </a>
               <button
@@ -207,10 +199,7 @@ const Hero = () => {
                 data-img="/static/public-v2/images/redesign/backgrounds/rightMenu/back_noBG.c93c654c3c00.png"
                 data-text="Свернуть меню"
               >
-                <div
-                  className={classes.heroAreaIcon}
-
-                />
+                <div className={classes.heroAreaIcon} />
                 Назад
               </button>
             </div>
