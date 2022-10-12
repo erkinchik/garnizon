@@ -1,20 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { AuthState, loginData, registerData } from "../../types/interface";
 
-const token = localStorage.getItem("token") || null;
-// const URL = process.env.REACT_APP_BASE_URL;
 const URL = "http://discoverystudio.xyz:6969"
-
-type Loading = "idle" | "pending" | "succeeded" | "failed";
-
-interface AuthState {
-  error: string | unknown;
-  isAuth: boolean;
-  isRegister: boolean
-  loading: Loading;
-  user: any;
-};
 
 const initialState = {
   error: "",
@@ -26,7 +15,7 @@ const initialState = {
 
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
-  async function (user: any,  { rejectWithValue }) {
+  async function (user: loginData,  { rejectWithValue }) {
     try {
       const response = await axios.post(`${URL}/auth/login`, user);
 
@@ -57,7 +46,7 @@ export const fetchLogin = createAsyncThunk(
 
 export const fetchRegister = createAsyncThunk(
   "auth/fetchRegister",
-  async function (user: any, { rejectWithValue }) {
+  async function (user: registerData, { rejectWithValue }) {
     try {
       const {data} = await axios.post(`${URL}/auth/register`, user);
       return data;

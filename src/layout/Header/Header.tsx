@@ -1,11 +1,15 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import classes from "./Header.module.scss";
 
 import { ReactComponent as TelegramIcon } from "../../icons/telegramIcon.svg";
 import { ReactComponent as WhatsAppIcon } from "../../icons/whatsappIcon.svg";
 import { ReactComponent as ProfileIcon } from "../../icons/profileIcon.svg";
+import { ReactComponent as LogoutIcon } from "../../icons/icon-exit.svg";
+import { ReactComponent as LogoutIcon2 } from "../../icons/icon-exited.svg";
+
+
 import {
   ERROR_PAGE,
   HOME_PAGE,
@@ -32,6 +36,8 @@ const links = [
 
 const Header: FC = () => {
   const dispatch = useAppDispatch()
+  const location = useLocation();
+
   return (
     <header className={classes.siteHeader}>
       <div className={classes.topHeader}>
@@ -69,25 +75,28 @@ const Header: FC = () => {
               </li>
             );
           })}
-
-          <li
-            className={`${classes.linkItem} ${classes.icon} ${classes.profile} `}
-            data-tooltip={"Личный Кабинет"}
-          >
-            <Link
-              to={PROFILE_PAGE}
-              className={`${classes.link} ${classes.icon} ${classes.profile}`}
+          {
+            location.pathname !== LOGIN_PAGE &&
+            <li
+              className={`${classes.linkItem} ${classes.icon} ${classes.profile} `}
+              data-tooltip={"Личный Кабинет"}
             >
-              <ProfileIcon />
-            </Link>
-          </li>
+              <Link
+                to={PROFILE_PAGE}
+                className={`${classes.link} ${classes.icon} ${classes.profile}`}
+              >
+                <ProfileIcon />
+              </Link>
+            </li>
+          }
+
 
           <li
             className={`${classes.linkItem} ${classes.icon} ${classes.profile} `}
             data-tooltip={"Выйти"}
           >
 
-            <ProfileIcon onClick={()=>dispatch(logout())}/>
+            <LogoutIcon onClick={() => dispatch(logout())} />
           </li>
 
         </ul>

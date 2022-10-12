@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import classes from "./ProfilePage.module.scss";
 
@@ -7,8 +7,23 @@ import { HistoryCard } from "../../components";
 import { Pagination } from "antd";
 import { Link } from "react-router-dom";
 import { HOME_PAGE } from "../../routes/path";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { getHistory } from "../../store/slices/userSlice";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { ItemType } from "../../types/type";
+
+
 
 const ProfilePage = () => {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector(state => state.auth);
+  const { history } = useAppSelector(state => state.user);
+
+  useEffect(() => {
+    dispatch(getHistory(user.id))
+  }, []);
+
+  console.log('history', history)
   const plan = true;
   return (
     <div className={classes.profile}>
@@ -45,9 +60,14 @@ const ProfilePage = () => {
 
         <section className={classes.historySection}>
           <div className={classes.historyBlock}>
-            <HistoryCard />
-            <HistoryCard />
-            <HistoryCard />
+            {history?.data.length ?
+
+              history.data.map((item: ItemType) => {
+                <HistoryCard item={item}/>
+              })
+              :
+              <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>Нет вызовов</h3>
+            }
           </div>
           <Pagination />
         </section>
