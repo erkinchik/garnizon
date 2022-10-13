@@ -1,21 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { AuthState, loginData, registerData } from "../../types/interface";
+import { notification } from "antd";
+import { token, user } from "../../utils";
 
-const URL = "http://discoverystudio.xyz:6969"
+const URL = "http://discoverystudio.xyz:6969";
 
 const initialState = {
   error: "",
-  isAuth: false,
-  isRegister: false,
+  isAuth: token || false,
+  isRegister: token || false,
   loading: "idle",
-  user: {},
+  user: JSON.parse(user || "{}") || {},
 } as AuthState;
 
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
-  async function (user: loginData,  { rejectWithValue }) {
+  async function (user: loginData, { rejectWithValue }) {
     try {
       const response = await axios.post(`${URL}/auth/login`, user);
 
@@ -29,6 +31,8 @@ export const fetchLogin = createAsyncThunk(
           },
         });
         localStorage.setItem("token", accessToken);
+        localStorage.setItem("user", JSON.stringify(login.data));
+
         return login.data;
       } catch (error) {
         const err = error as any;
@@ -41,14 +45,11 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-
-
-
 export const fetchRegister = createAsyncThunk(
   "auth/fetchRegister",
   async function (user: registerData, { rejectWithValue }) {
     try {
-      const {data} = await axios.post(`${URL}/auth/register`, user);
+      const { data } = await axios.post(`${URL}/auth/register`, user);
       return data;
     } catch (error: any) {
       return rejectWithValue(error.response.data.message);
@@ -101,6 +102,7 @@ const authSlice = createSlice({
   reducers: {
     logout(state) {
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       state.isAuth = false;
     },
   },
@@ -111,28 +113,40 @@ const authSlice = createSlice({
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.loading = "failed";
       state.error = action.payload;
-      toast.error(`${action.payload}`);
+
+      notification.error({
+        message: action.payload as string,
+        placement: "topLeft",
+      });
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.user = action.payload;
       state.error = "succeeded";
       state.isAuth = true;
+      notification.success({
+        message: "Авторизация прошла успешно",
+        placement: "topLeft",
+      });
     });
 
-
-    builder.addCase(fetchRegister.pending, (state)=>{
+    builder.addCase(fetchRegister.pending, (state) => {
       state.loading = "pending";
-    })
-    builder.addCase(fetchRegister.fulfilled, (state)=>{
+    });
+    builder.addCase(fetchRegister.fulfilled, (state, action) => {
       state.loading = "succeeded";
       state.isRegister = true;
-      toast.success('Регистрация прошла успешно');
-    })
-    builder.addCase(fetchRegister.rejected, (state, action)=>{
+      state.user = action.payload;
+
+      notification.error({
+        message: "Регистрация прошла успешно",
+        placement: "topLeft",
+      });
+    });
+    builder.addCase(fetchRegister.rejected, (state, action) => {
       state.loading = "failed";
-      state.isRegister = false
-      toast.error(`${action.payload}`);
-    })
+      state.isRegister = false;
+      // toast.error(`${action.payload}`);
+    });
 
     // [fetchLogin.pending]: (state) => {
     //     state.loading = true;

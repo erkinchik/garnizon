@@ -5,6 +5,8 @@ import classes from "./PlansSection.module.scss";
 import { Button, Divider, notification, Space } from "antd";
 import type { NotificationPlacement } from "antd/es/notification";
 import { getNoun } from "../../../utils/getNoun";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { token } from "../../../utils";
 
 const plans = [
   { title: "Стандартный", price: 500, callsQuantity: 1 },
@@ -23,14 +25,23 @@ const plans = [
 ];
 
 const PlansSection = () => {
-  const isAuth = true;
-  const openNotification = (placement: NotificationPlacement) => {
+  const { isAuth } = useAppSelector((s) => s.auth);
+
+  const openNotification = () => {
     notification.error({
       message: `Вы не Авторизованы!`,
       description: "Для покупки подписки авторизуйтесь",
-      placement,
+      placement: "topLeft",
     });
   };
+  const openModal = () => {
+    notification.error({
+      message: `12122112`,
+      description: "21122112",
+      placement: "topLeft",
+    });
+  };
+
   return (
     <section className={classes.section}>
       <div className={classes.container}>
@@ -38,6 +49,7 @@ const PlansSection = () => {
           return (
             <div className={classes.column}>
               <div className={`${classes.pricingCard} ${classes.basic}`}>
+                {plan.isPopular && <div className={classes.popular}>популярный</div>}
                 <div className={classes.pricingHeader}>
                   <span className={classes.planTitle}>{plan.title}</span>
                   {typeof plan.price !== "string" && (
@@ -47,7 +59,6 @@ const PlansSection = () => {
                           <small>{plan.price}сом</small>
                         </span>
                       </span>
-                      {/*<span className={classes.info}>/ Month</span>*/}
                     </div>
                   )}
                 </div>
@@ -68,7 +79,7 @@ const PlansSection = () => {
                 </ul>
                 <div
                   className={classes.buyButtonBox}
-                  onClick={() => openNotification("topLeft")}
+                  onClick={isAuth ? openModal : openNotification}
                 >
                   <button className={classes.buyNow}>Купить</button>
                 </div>

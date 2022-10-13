@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { UserState } from "../../types/interface";
 
 const URL = "http://discoverystudio.xyz:6969"
@@ -37,7 +37,7 @@ const userSlice = createSlice({
         });
         builder.addCase(getHistory.rejected, (state, action) => {
             state.loading = "failed";
-            toast.error(`${action.payload}`);
+            // toast.error(`${action.payload}`);
         });
         builder.addCase(getHistory.fulfilled, (state, action) => {
             state.loading = "succeeded";

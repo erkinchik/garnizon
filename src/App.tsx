@@ -8,13 +8,13 @@ import { LOGIN_PAGE } from "./routes/path";
 import { token } from "./utils";
 
 function App() {
-  const navigate = useNavigate();
-  const { isAuth } = useAppSelector(s => s.auth);
-  useEffect(() => {
-    if (!token || !isAuth) {
-      navigate(LOGIN_PAGE);
-    }
-  }, [token, isAuth]);
+  // const navigate = useNavigate();
+  // const { isAuth } = useAppSelector(s => s.auth);
+  // useEffect(() => {
+  //   if (!token || !isAuth) {
+  //     navigate(LOGIN_PAGE);
+  //   }
+  // }, [token, isAuth]);
 
   return (
     <div className="App">

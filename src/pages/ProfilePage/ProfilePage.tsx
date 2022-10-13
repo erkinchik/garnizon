@@ -12,18 +12,15 @@ import { getHistory } from "../../store/slices/userSlice";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { ItemType } from "../../types/type";
 
-
-
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(state => state.auth);
-  const { history } = useAppSelector(state => state.user);
+  const { user } = useAppSelector((state) => state.auth);
+  const { history } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getHistory(user.id))
+    dispatch(getHistory(user.id));
   }, []);
 
-  console.log('history', history)
   const plan = true;
   return (
     <div className={classes.profile}>
@@ -35,14 +32,14 @@ const ProfilePage = () => {
             </div>
             <div className={classes.profileText}>
               <h4 className={classes.profileUserInfo}>
-                <span>Имя: Jhon</span>
-                <span>Фамилия: Jamson</span>
+                <span>Имя: {user.firstName}</span>
+                <span>Фамилия: {user.lastName}</span>
               </h4>
               <h4 className={classes.profileContactInfo}>
-                <span>Номер телефона: +996777897746</span>
-                <span>Email: jhon@gmail.com</span>
+                <span>Номер телефона: {user.phone}</span>
+                <span>Email: {user.email}</span>
               </h4>
-              {plan ? (
+              {user.purchases.length ? (
                 <h5 className={classes.currentPlan}>
                   Тариф: &nbsp;<span>Стандартный</span>
                 </h5>
@@ -60,14 +57,15 @@ const ProfilePage = () => {
 
         <section className={classes.historySection}>
           <div className={classes.historyBlock}>
-            {history?.data.length ?
-
+            {history?.data.length ? (
               history.data.map((item: ItemType) => {
-                <HistoryCard item={item}/>
+                return <HistoryCard item={item} />;
               })
-              :
-              <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>Нет вызовов</h3>
-            }
+            ) : (
+              <h3 style={{ textAlign: "center", marginBottom: "50px" }}>
+                Нет вызовов
+              </h3>
+            )}
           </div>
           <Pagination />
         </section>

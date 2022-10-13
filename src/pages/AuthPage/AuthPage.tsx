@@ -1,9 +1,10 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import classes from "./AuthPage.module.scss";
 import { LoginForm, SignUpForm } from "../../components";
-import { LOGIN_PAGE, REGISTRATION_PAGE } from "../../routes/path";
+import { HOME_PAGE, LOGIN_PAGE, REGISTRATION_PAGE } from "../../routes/path";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 const AuthPage = () => {
   const { pathname } = useLocation();

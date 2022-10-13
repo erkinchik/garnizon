@@ -2,7 +2,7 @@ import { Loading } from "./type";
 
 export interface AuthState {
     error: string | unknown;
-    isAuth: boolean;
+    isAuth: boolean | string;
     isRegister: boolean
     loading: Loading;
     user: any;
